@@ -5,9 +5,9 @@
 # source: personal projects library
 
 # Assignment:
-# Shape Area and Perimeter Classes - Create an abstract class called Shape and 
-# then inherit from it other shapes like diamond, rectangle, circle, triangle 
-# etc. Then have each class override the area and perimeter functionality to 
+# Shape Area and Perimeter Classes - Create an abstract class called Shape and
+# then inherit from it other shapes like diamond, rectangle, circle, triangle
+# etc. Then have each class override the area and perimeter functionality to
 # handle each shape type.
 
 import traceback
@@ -22,7 +22,7 @@ def squared(a):
 
 
 def herons(p, s1, s2, s3):
-    # Use Heron's Formula to calculate triangle 
+    # Use Heron's Formula to calculate triangle
     # area so only the 3 sides are required
     s = p / 2.0
     a = round(math.sqrt(s * ((s - s1) * (s - s2) * (s - s3))), 2)

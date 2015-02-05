@@ -5,9 +5,9 @@
 # source: personal projects library
 
 # Assignment:
-# Flower Shop Ordering To Go - Create a flower shop application which deals in 
-# flower objects and use those flower objects in a bouquet object which can 
-# then be sold. Keep track of the number of objects and when you may need to 
+# Flower Shop Ordering To Go - Create a flower shop application which deals in
+# flower objects and use those flower objects in a bouquet object which can
+# then be sold. Keep track of the number of objects and when you may need to
 # order more.
 
 import sys
@@ -16,7 +16,7 @@ import itertools
 
 
 class flower:
-    
+
     def __init__(self, fl_id, name):
         self.name = name
         # Set a flower id in case it's needed in the future
@@ -29,9 +29,9 @@ class flower:
 class bouquet:
     bouquet_inventory = []
     bouquet_onhand = {}
-    
+
     def create_bouquet(self, *fl):
-        new_bouquet = []        
+        new_bouquet = []
         new_bouquet.extend(fl)
         bouquet.bouquet_inventory.append(list(itertools.chain(*new_bouquet)))
         bouquet.bouquet_onhand.update({fl[0][0]: 1})
@@ -89,7 +89,7 @@ def main():
         manage_bouquets.sell_bouquet('b3', 3)
 
         print '------------'
-        
+
         # Updated catalogue
         manage_bouquets.show_bouquets()
 
