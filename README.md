@@ -27,3 +27,9 @@ Class "product" creates product instances and class "inventory" manages them.
 Source file: flower-shop.py
 
 Class "flower" creates flower instances and class "bouquet" organizes them into bouquets. The bouquet class allows adding more bouquets and selling them and prints alerts when the stock is too low or bouquets can't be sold.
+
+### Bank Account Manager
+
+Source file: bank-manager.py
+
+Abstract class "account" and bank account type classes inheriting from account to handle debits, credits, minimum balances, overdraft charges, interest rates, and total balance.
