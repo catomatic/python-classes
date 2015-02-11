@@ -33,7 +33,7 @@ class bouquet:
     def create_bouquet(self, *fl):
         new_bouquet = []
         new_bouquet.extend(fl)
-        bouquet.bouquet_inventory.append(list(itertools.chain(*new_bouquet)))
+        bouquet.bouquet_inventory.append(list(itertools.chain.from_iterable(new_bouquet)))
         bouquet.bouquet_onhand.update({fl[0][0]: 1})
 
     def sell_bouquet(self, b_id, amt):
