@@ -10,10 +10,10 @@
 # one's pay is calculated differently, research a bit about it. After you've
 # established an employee hierarchy, create a Company class that allows you to
 # manage the employees. You should be able to hire, fire and raise employees.
+# https://github.com/karan/Projects
 
 import sys
 import traceback
-from abc import ABCMeta, abstractmethod
 
 
 def pct_to_dec(num):
@@ -22,74 +22,50 @@ def pct_to_dec(num):
     return dec
 
 
-class employee(object):
-    __metaclass__ = ABCMeta
-
+class employee(object):    
     def __init__(self, total_pay):
         self.total_pay
 
-    @abstractmethod
-    def pay_amt(self):
+    def __str__(self):
         return 'Total pay: {0}'.format(self.total_pay)
 
 
 class hourly_employee(employee):
-
     def __init__(self, pay_hour, bonus, wk_hours, pay_raise):
         self.pay_hour = pay_hour
         self.bonus = bonus
         self.wk_hours = wk_hours
         self.pay_raise = pay_raise
-
-    def pay_amt(self):
-        # Really rough calculations here...
         base_year = (self.pay_hour * self.wk_hours) * 52
         give_raise = (base_year * pct_to_dec(self.pay_raise)) + base_year
         self.total_pay = give_raise + self.bonus
-        x = super(hourly_employee, self).pay_amt()
-        return '{0}'.format(x)
 
 
 class salaried_employee(employee):
-
     def __init__(self, pay_year, bonus, pay_raise):
         self.pay_year = pay_year
         self.bonus = bonus
         self.pay_raise = pay_raise
-
-    def pay_amt(self):
         give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
         self.total_pay = give_raise + self.bonus
-        x = super(salaried_employee, self).pay_amt()
-        return '{0}'.format(x)
 
 
 class manager(employee):
-
     def __init__(self, pay_year, bonus, pay_raise):
         self.pay_year = pay_year
         self.bonus = bonus
         self.pay_raise = pay_raise
-
-    def pay_amt(self):
         give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
         self.total_pay = give_raise + self.bonus
-        x = super(manager, self).pay_amt()
-        return '{0}'.format(x)
 
 
 class executive(employee):
-
     def __init__(self, pay_year, bonus, pay_raise):
         self.pay_year = pay_year
         self.bonus = bonus
         self.pay_raise = pay_raise
-
-    def pay_amt(self):
         give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
         self.total_pay = give_raise + self.bonus
-        x = super(executive, self).pay_amt()
-        return '{0}'.format(x)
 
 
 class company:
@@ -123,7 +99,7 @@ def main():
         he1.emp_type = 'Hourly Employee'
         print he1.emp_name
         print he1.emp_type
-        print he1.pay_amt()
+        print he1
         company_stuff.hired(he1.emp_name)
         print '-------------'
 
@@ -132,10 +108,10 @@ def main():
         he2.emp_type = 'Hourly Employee'
         print he2.emp_name
         print he2.emp_type
-        print he2.pay_amt()
+        print he2
         he2.bonus = 200
         he2.pay_raise = 5
-        print he2.pay_amt()
+        print he2
         company_stuff.hired(he2.emp_name)
         print '-------------'
 
@@ -144,7 +120,7 @@ def main():
         se1.emp_type = 'Salaried Employee'
         print se1.emp_name
         print se1.emp_type
-        print se1.pay_amt()
+        print se1
         company_stuff.hired(se1.emp_name)
         print '-------------'
 
@@ -153,7 +129,7 @@ def main():
         m1.emp_type = 'Manager'
         print m1.emp_name
         print m1.emp_type
-        print m1.pay_amt()
+        print m1
         company_stuff.hired(m1.emp_name)
         print '-------------'
 
@@ -162,7 +138,7 @@ def main():
         ex1.emp_type = 'Executive'
         print ex1.emp_name
         print ex1.emp_type
-        print ex1.pay_amt()
+        print ex1
         company_stuff.hired(ex1.emp_name)
         print '-------------'
 
