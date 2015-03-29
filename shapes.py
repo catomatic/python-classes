@@ -9,11 +9,11 @@
 # then inherit from it other shapes like diamond, rectangle, circle, triangle
 # etc. Then have each class override the area and perimeter functionality to
 # handle each shape type.
+# https://github.com/karan/Projects
 
 import traceback
 import sys
 import math
-from abc import ABCMeta, abstractmethod
 
 
 def squared(a):
@@ -29,116 +29,88 @@ def herons(p, s1, s2, s3):
     return a
 
 
-class shape(object):
-    __metaclass__ = ABCMeta
-
+class Shape:
     def __init__(self, area, perimeter):
         self.area = area
         self.perimeter = perimeter
 
-    @abstractmethod
-    def size(self):
+    def __str__(self):
         return 'Area: {0} Perimeter: {1}'.format(self.area, self.perimeter)
 
 
-class rectangle(shape):
-
+class Rectangle(Shape):
     def __init__(self, width, height):
         self.width = width
         self.height = height
-
-    def size(self):
         self.area = self.width * self.height
         self.perimeter = (self.width * 2) + (self.height * 2)
-        x = super(rectangle, self).size()
-        return '{0}'.format(x)
 
 
-class square(shape):
-
+class Square(Shape):
     def __init__(self, sides):
         self.sides = sides
-
-    def size(self):
         self.area = squared(self.sides)
         self.perimeter = self.sides * 4
-        x = super(square, self).size()
-        return '{0}'.format(x)
 
 
-class circle(shape):
-
+class Circle(Shape):
     def __init__(self, radius):
         self.radius = radius
-
-    def size(self):
         self.area = round(math.pi * squared(self.radius), 2)
         self.perimeter = round((2 * math.pi) * self.radius, 2)
-        x = super(circle, self).size()
-        return '{0}'.format(x)
 
 
-class diamond(shape):
-
+class Diamond(Shape):
     def __init__(self, sides, angle):
         self.sides = sides
         self.angle = angle
-
-    def size(self):
         self.area = round(squared(self.sides) * math.sin(self.angle), 2)
         self.perimeter = self.sides * 4
-        x = super(diamond, self).size()
-        return '{0}'.format(x)
 
 
-class triangle(shape):
-
+class Triangle(Shape):
     def __init__(self, side1, side2, side3):
         self.side1 = side1
         self.side2 = side2
         self.side3 = side3
-
-    def size(self):
         self.perimeter = self.side1 + self.side2 + self.side3
         self.area = herons(self.perimeter, self.side1, self.side2, self.side3)
-        x = super(triangle, self).size()
-        return '{0}'.format(x)
 
 
 def main():
     try:
-        r1 = rectangle(6, 10)
+        r1 = Rectangle(6, 10)
         r1.name = 'Rectangle'
         print r1.name
-        print r1.size()
+        print r1
 
         print '-------------'
 
-        s1 = square(10)
+        s1 = Square(10)
         s1.name = 'Square'
         print s1.name
-        print s1.size()
+        print s1
 
         print '-------------'
 
-        c1 = circle(8)
+        c1 = Circle(8)
         c1.name = 'Circle'
         print c1.name
-        print c1.size()
+        print c1
 
         print '-------------'
 
-        d1 = diamond(13, 45)
+        d1 = Diamond(13, 45)
         d1.name = 'Diamond'
         print d1.name
-        print d1.size()
+        print d1
 
         print '-------------'
 
-        t1 = triangle(5, 7, 3)
+        t1 = Triangle(5, 7, 3)
         t1.name = 'Triangle'
         print t1.name
-        print t1.size()
+        print t1
     except Exception:
         print traceback.print_exc()
         sys.exit(2)
