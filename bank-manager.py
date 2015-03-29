@@ -9,10 +9,10 @@
 # class for three other classes called CheckingAccount, SavingsAccount and
 # BusinessAccount. Manage credits and debits from these accounts through an ATM
 # style program.
+# https://github.com/karan/Projects
 
 import sys
 import traceback
-from abc import ABCMeta, abstractmethod
 
 
 def pct_to_dec(num):
@@ -21,8 +21,7 @@ def pct_to_dec(num):
     return dec
 
 
-class account:
-    __metaclass__ = ABCMeta
+class account:    
 
     def __init__(self, balance):
         self.balance = balance
@@ -30,15 +29,13 @@ class account:
     def credit(self, amount):
         self.balance += amount
 
-    @abstractmethod
     def debit(self):
         return self.balance
 
     def add_interest(self, int_rate):
         self.balance = self.balance * pct_to_dec(int_rate) + self.balance
 
-    @abstractmethod
-    def account_info(self):
+    def __str__(self):
         return '${0}'.format(self.balance)
 
 
@@ -52,10 +49,6 @@ class checking_account(account):
         if self.balance < 0:
             self.balance -= 35
             print 'You have been charged an overdraft fee.'
-
-    def account_info(self):
-        x = super(checking_account, self).account_info()
-        return '{0}'.format(x)
 
 
 class savings_account(account):
@@ -71,10 +64,6 @@ class savings_account(account):
         else:
             self.balance -= amount
 
-    def account_info(self):
-        x = super(savings_account, self).account_info()
-        return '{0}'.format(x)
-
 
 class business_account(account):
     min_balance = 5000
@@ -88,67 +77,63 @@ class business_account(account):
         else:
             self.balance -= amount
 
-    def account_info(self):
-        x = super(business_account, self).account_info()
-        return '{0}'.format(x)
-
 
 def main():
     try:
         ca1 = checking_account()
         ca1.type = 'Checking Account'
         print ca1.type
-        print ca1.account_info()
+        print ca1
         ca1.credit(100)
-        print ca1.account_info()
+        print ca1
         ca1.credit(100)
-        print ca1.account_info()
+        print ca1
         ca1.credit(500)
-        print ca1.account_info()
+        print ca1
         ca1.debit(100)
-        print ca1.account_info()
+        print ca1
         ca1.debit(700)
-        print ca1.account_info()
+        print ca1
         ca1.credit(500)
-        print ca1.account_info()
+        print ca1
 
         print '-------------'
 
         sa1 = savings_account()
         sa1.type = 'Savings Account'
         print sa1.type
-        print sa1.account_info()
+        print sa1
         sa1.credit(5000)
-        print sa1.account_info()
+        print sa1
         sa1.add_interest(3)
-        print sa1.account_info()
+        print sa1
         sa1.add_interest(3)
-        print sa1.account_info()
+        print sa1
         sa1.credit(100)
-        print sa1.account_info()
+        print sa1
         sa1.debit(600)
-        print sa1.account_info()
+        print sa1
         sa1.debit(5000)
-        print sa1.account_info()
+        print sa1
         sa1.debit(4804.5)
-        print sa1.account_info()
+        print sa1
         sa1.debit(100)
-        print sa1.account_info()
+        print sa1
         sa1.credit(5000)
-        print sa1.account_info()
+        print sa1
 
         print '-------------'
 
         ba1 = business_account()
         ba1.type = 'Business Account'
         print ba1.type
-        print ba1.account_info()
+        print ba1
         ba1.credit(1000)
-        print ba1.account_info()
+        print ba1
         ba1.debit(2000)
-        print ba1.account_info()
+        print ba1
         ba1.add_interest(3)
-        print ba1.account_info()
+        print ba1
 
     except Exception:
         print traceback.print_exc()
