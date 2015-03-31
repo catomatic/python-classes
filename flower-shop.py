@@ -5,56 +5,57 @@
 # source: personal projects library
 
 # Assignment:
-# Flower Shop Ordering To Go - Create a flower shop application which deals in
-# flower objects and use those flower objects in a bouquet object which can
+# Flower Shop Ordering To Go - Create a Flower shop application which deals in
+# Flower objects and use those Flower objects in a Bouquet object which can
 # then be sold. Keep track of the number of objects and when you may need to
 # order more.
+# https://github.com/karan/Projects
 
 import sys
 import traceback
 import itertools
 
 
-class flower:
+class Flower:
 
     def __init__(self, fl_id, name):
         self.name = name
-        # Set a flower id in case it's needed in the future
+        # Set a Flower id in case it's needed in the future
         self.fl_id = fl_id
 
     def flower_info(self):
         return self.name
 
 
-class bouquet:
+class Bouquet:
     bouquet_inventory = []
     bouquet_onhand = {}
 
     def create_bouquet(self, *fl):
         new_bouquet = []
         new_bouquet.extend(fl)
-        bouquet.bouquet_inventory.append(list(itertools.chain.from_iterable(new_bouquet)))
-        bouquet.bouquet_onhand.update({fl[0][0]: 1})
+        Bouquet.bouquet_inventory.append(list(itertools.chain.from_iterable(new_bouquet)))
+        Bouquet.bouquet_onhand.update({fl[0][0]: 1})
 
     def sell_bouquet(self, b_id, amt):
-        for k, v in bouquet.bouquet_onhand.iteritems():
+        for k, v in Bouquet.bouquet_onhand.iteritems():
             if v <= 0 or v - amt < 0:
                 print "Can't sell any more {0}.".format(k)
             elif v - amt < 0:
                 print "Not enough stock to sell {0} {1}.".format(amt, k)
             else:
-                bouquet.bouquet_onhand.update({b_id: v - amt})
+                Bouquet.bouquet_onhand.update({b_id: v - amt})
 
     def add_bouquet(self, b_id, amt):
-        for k, v in bouquet.bouquet_onhand.iteritems():
-            bouquet.bouquet_onhand.update({b_id: v + amt})
+        for k, v in Bouquet.bouquet_onhand.iteritems():
+            Bouquet.bouquet_onhand.update({b_id: v + amt})
 
     def show_bouquets(self):
         print 'Catalogue:'
-        for each in bouquet.bouquet_inventory:
+        for each in Bouquet.bouquet_inventory:
             print '{0}'.format(each)
         print 'Quantity on hand:'
-        for k, v in bouquet.bouquet_onhand.iteritems():
+        for k, v in Bouquet.bouquet_onhand.iteritems():
             print '{0}: {1}'.format(k, v)
             if v <= 1:
                 print 'Need to reorder {0}.'.format(k)
@@ -62,16 +63,16 @@ class bouquet:
 
 def main():
     try:
-        manage_bouquets = bouquet()
+        manage_bouquets = Bouquet()
 
-        f1 = flower('f1', 'Red Rose')
-        f2 = flower('f2', 'White Lily')
-        f3 = flower('f3', 'Yellow Lily')
-        f4 = flower('f4', 'Pink Rose')
-        f5 = flower('f5', 'Dandelion')
-        f6 = flower('f6', 'Black Tulip')
-        f7 = flower('f7', 'Red Tulip')
-        f8 = flower('f8', 'White Daisy')
+        f1 = Flower('f1', 'Red Rose')
+        f2 = Flower('f2', 'White Lily')
+        f3 = Flower('f3', 'Yellow Lily')
+        f4 = Flower('f4', 'Pink Rose')
+        f5 = Flower('f5', 'Dandelion')
+        f6 = Flower('f6', 'Black Tulip')
+        f7 = Flower('f7', 'Red Tulip')
+        f8 = Flower('f8', 'White Daisy')
 
         # Create the initial bouquets w/ default qty
         manage_bouquets.create_bouquet(['b1'], [f1.flower_info(), f2.flower_info(), f5.flower_info()])

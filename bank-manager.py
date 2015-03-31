@@ -21,7 +21,7 @@ def pct_to_dec(num):
     return dec
 
 
-class account:    
+class Account:    
 
     def __init__(self, balance):
         self.balance = balance
@@ -39,7 +39,7 @@ class account:
         return '${0}'.format(self.balance)
 
 
-class checking_account(account):
+class CheckingAccount(Account):
 
     def __init__(self):
         self.balance = 0
@@ -51,7 +51,7 @@ class checking_account(account):
             print 'You have been charged an overdraft fee.'
 
 
-class savings_account(account):
+class SavingsAccount(Account):
 
     def __init__(self):
         self.balance = 0
@@ -65,22 +65,22 @@ class savings_account(account):
             self.balance -= amount
 
 
-class business_account(account):
+class BusinessAccount(Account):
     min_balance = 5000
 
     def __init__(self):
         self.balance = 5000
 
     def debit(self, amount):
-        if self.balance - amount < business_account.min_balance:
-            print 'Must maintain ${0} minimum balance'.format(business_account.min_balance)
+        if self.balance - amount < BusinessAccount.min_balance:
+            print 'Must maintain ${0} minimum balance'.format(BusinessAccount.min_balance)
         else:
             self.balance -= amount
 
 
 def main():
     try:
-        ca1 = checking_account()
+        ca1 = CheckingAccount()
         ca1.type = 'Checking Account'
         print ca1.type
         print ca1
@@ -99,7 +99,7 @@ def main():
 
         print '-------------'
 
-        sa1 = savings_account()
+        sa1 = SavingsAccount()
         sa1.type = 'Savings Account'
         print sa1.type
         print sa1
@@ -124,7 +124,7 @@ def main():
 
         print '-------------'
 
-        ba1 = business_account()
+        ba1 = BusinessAccount()
         ba1.type = 'Business Account'
         print ba1.type
         print ba1

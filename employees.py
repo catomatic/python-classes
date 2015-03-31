@@ -22,7 +22,7 @@ def pct_to_dec(num):
     return dec
 
 
-class employee(object):    
+class Employee:    
     def __init__(self, total_pay):
         self.total_pay
 
@@ -30,7 +30,7 @@ class employee(object):
         return 'Total pay: {0}'.format(self.total_pay)
 
 
-class hourly_employee(employee):
+class HourlyEmployee(Employee):
     def __init__(self, pay_hour, bonus, wk_hours, pay_raise):
         self.pay_hour = pay_hour
         self.bonus = bonus
@@ -41,7 +41,7 @@ class hourly_employee(employee):
         self.total_pay = give_raise + self.bonus
 
 
-class salaried_employee(employee):
+class SalariedEmployee(Employee):
     def __init__(self, pay_year, bonus, pay_raise):
         self.pay_year = pay_year
         self.bonus = bonus
@@ -50,7 +50,7 @@ class salaried_employee(employee):
         self.total_pay = give_raise + self.bonus
 
 
-class manager(employee):
+class Manager(Employee):
     def __init__(self, pay_year, bonus, pay_raise):
         self.pay_year = pay_year
         self.bonus = bonus
@@ -59,7 +59,7 @@ class manager(employee):
         self.total_pay = give_raise + self.bonus
 
 
-class executive(employee):
+class Executive(Employee):
     def __init__(self, pay_year, bonus, pay_raise):
         self.pay_year = pay_year
         self.bonus = bonus
@@ -94,7 +94,7 @@ def main():
     try:
         company_stuff = company()
 
-        he1 = hourly_employee(12, 1000, 30, 5)
+        he1 = HourlyEmployee(12, 1000, 30, 5)
         he1.emp_name = 'Mittens'
         he1.emp_type = 'Hourly Employee'
         print he1.emp_name
@@ -103,7 +103,7 @@ def main():
         company_stuff.hired(he1.emp_name)
         print '-------------'
 
-        he2 = hourly_employee(12, 0, 30, 0)
+        he2 = HourlyEmployee(12, 0, 30, 0)
         he2.emp_name = 'Chirpy'
         he2.emp_type = 'Hourly Employee'
         print he2.emp_name
@@ -115,7 +115,7 @@ def main():
         company_stuff.hired(he2.emp_name)
         print '-------------'
 
-        se1 = salaried_employee(45000, 500, 2)
+        se1 = SalariedEmployee(45000, 500, 2)
         se1.emp_name = 'Fluffy'
         se1.emp_type = 'Salaried Employee'
         print se1.emp_name
@@ -124,7 +124,7 @@ def main():
         company_stuff.hired(se1.emp_name)
         print '-------------'
 
-        m1 = manager(80000, 2000, 1)
+        m1 = Manager(80000, 2000, 1)
         m1.emp_name = 'Flipper'
         m1.emp_type = 'Manager'
         print m1.emp_name
@@ -133,7 +133,7 @@ def main():
         company_stuff.hired(m1.emp_name)
         print '-------------'
 
-        ex1 = executive(120000, 10000, 5)
+        ex1 = Executive(120000, 10000, 5)
         ex1.emp_name = 'Rufus'
         ex1.emp_type = 'Executive'
         print ex1.emp_name
