@@ -32,40 +32,27 @@ class Employee:
 
 class HourlyEmployee(Employee):
     def __init__(self, pay_hour, bonus, wk_hours, pay_raise):
-        self.pay_hour = pay_hour
-        self.bonus = bonus
-        self.wk_hours = wk_hours
-        self.pay_raise = pay_raise
-        base_year = (self.pay_hour * self.wk_hours) * 52
-        give_raise = (base_year * pct_to_dec(self.pay_raise)) + base_year
-        self.total_pay = give_raise + self.bonus
+        base_year = (pay_hour * wk_hours) * 52
+        give_raise = (base_year * pct_to_dec(pay_raise)) + base_year
+        self.total_pay = give_raise + bonus
 
 
 class SalariedEmployee(Employee):
     def __init__(self, pay_year, bonus, pay_raise):
-        self.pay_year = pay_year
-        self.bonus = bonus
-        self.pay_raise = pay_raise
-        give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
-        self.total_pay = give_raise + self.bonus
+        give_raise = (pay_year * pct_to_dec(pay_raise)) + pay_year
+        self.total_pay = give_raise + bonus
 
 
 class Manager(Employee):
     def __init__(self, pay_year, bonus, pay_raise):
-        self.pay_year = pay_year
-        self.bonus = bonus
-        self.pay_raise = pay_raise
-        give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
-        self.total_pay = give_raise + self.bonus
+        give_raise = (pay_year * pct_to_dec(pay_raise)) + pay_year
+        self.total_pay = give_raise + bonus
 
 
 class Executive(Employee):
     def __init__(self, pay_year, bonus, pay_raise):
-        self.pay_year = pay_year
-        self.bonus = bonus
-        self.pay_raise = pay_raise
-        give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
-        self.total_pay = give_raise + self.bonus
+        give_raise = (pay_year * pct_to_dec(pay_raise)) + pay_year
+        self.total_pay = give_raise + bonus
 
 
 class company:
