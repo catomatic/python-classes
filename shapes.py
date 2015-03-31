@@ -40,41 +40,32 @@ class Shape:
 
 class Rectangle(Shape):
     def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.area = self.width * self.height
-        self.perimeter = (self.width * 2) + (self.height * 2)
+        self.area = width * height
+        self.perimeter = (width * 2) + (height * 2)
 
 
 class Square(Shape):
     def __init__(self, sides):
-        self.sides = sides
-        self.area = squared(self.sides)
-        self.perimeter = self.sides * 4
+        self.area = squared(sides)
+        self.perimeter = sides * 4
 
 
 class Circle(Shape):
     def __init__(self, radius):
-        self.radius = radius
-        self.area = round(math.pi * squared(self.radius), 2)
-        self.perimeter = round((2 * math.pi) * self.radius, 2)
+        self.area = round(math.pi * squared(radius), 2)
+        self.perimeter = round((2 * math.pi) * radius, 2)
 
 
 class Diamond(Shape):
     def __init__(self, sides, angle):
-        self.sides = sides
-        self.angle = angle
-        self.area = round(squared(self.sides) * math.sin(self.angle), 2)
-        self.perimeter = self.sides * 4
+        self.area = round(squared(sides) * math.sin(angle), 2)
+        self.perimeter = sides * 4
 
 
 class Triangle(Shape):
     def __init__(self, side1, side2, side3):
-        self.side1 = side1
-        self.side2 = side2
-        self.side3 = side3
-        self.perimeter = self.side1 + self.side2 + self.side3
-        self.area = herons(self.perimeter, self.side1, self.side2, self.side3)
+        self.perimeter = side1 + side2 + side3
+        self.area = herons(self.perimeter, side1, side2, side3)
 
 
 def main():
