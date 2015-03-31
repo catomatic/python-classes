@@ -29,81 +29,103 @@ def herons(p, s1, s2, s3):
     return a
 
 
-class Shape:
-    def __init__(self, area, perimeter):
-        self.area = area
-        self.perimeter = perimeter
+class Shape(object):
+    def __init__(self, name, color, **kwds):
+        self.name = name
+        self.color = color
+        super(Shape, self).__init__(**kwds)
 
-    def __str__(self):
-        return 'Area: {0} Perimeter: {1}'.format(self.area, self.perimeter)
+    def shape_name(self):
+        return 'Name: {0}'.format(self.name)
+
+    def shape_area(self):
+        return 'Area: {0}'.format(self.area)
+
+    def shape_perimeter(self):
+        return 'Perimeter: {0}'.format(self.perimeter)
+
+    def shape_color(self):
+        return 'Color: {0}'.format(self.color)
 
 
 class Rectangle(Shape):
-    def __init__(self, width, height):
+    def __init__(self, width, height, **kwds):
         self.area = width * height
         self.perimeter = (width * 2) + (height * 2)
+        super(Rectangle, self).__init__(**kwds)
 
 
 class Square(Shape):
-    def __init__(self, sides):
+    def __init__(self, sides, **kwds):
         self.area = squared(sides)
         self.perimeter = sides * 4
+        super(Square, self).__init__(**kwds)
 
 
 class Circle(Shape):
-    def __init__(self, radius):
+    def __init__(self, radius, **kwds):
         self.area = round(math.pi * squared(radius), 2)
         self.perimeter = round((2 * math.pi) * radius, 2)
+        super(Circle, self).__init__(**kwds)
 
 
 class Diamond(Shape):
-    def __init__(self, sides, angle):
+    def __init__(self, sides, angle, **kwds):
         self.area = round(squared(sides) * math.sin(angle), 2)
         self.perimeter = sides * 4
+        super(Diamond, self).__init__(**kwds)
 
 
 class Triangle(Shape):
-    def __init__(self, side1, side2, side3):
+    def __init__(self, side1, side2, side3, **kwds):
         self.perimeter = side1 + side2 + side3
         self.area = herons(self.perimeter, side1, side2, side3)
+        super(Triangle, self).__init__(**kwds)
 
 
 def main():
     try:
-        r1 = Rectangle(6, 10)
-        r1.name = 'Rectangle'
-        print r1.name
-        print r1
+        r1 = Rectangle(width=10, height=6, name='Rectangle', color='red')
+        print(r1.shape_name())
+        print(r1.shape_area())
+        print(r1.shape_perimeter())
+        print(r1.shape_color())
 
-        print '-------------'
+        print('-------------')
 
-        s1 = Square(10)
-        s1.name = 'Square'
-        print s1.name
-        print s1
+        s1 = Square(sides=10, name='Square', color='yellow')
+        print(s1.shape_name())
+        print(s1.shape_area())
+        print(s1.shape_perimeter())
+        print(s1.shape_color())
 
-        print '-------------'
+        print('-------------')
 
-        c1 = Circle(8)
-        c1.name = 'Circle'
-        print c1.name
-        print c1
+        c1 = Circle(radius=8, name='Circle', color='green')
+        print(c1.shape_name())
+        print(c1.shape_area())
+        print(c1.shape_perimeter())
+        print(c1.shape_color())
 
-        print '-------------'
+        print('-------------')
 
-        d1 = Diamond(13, 45)
-        d1.name = 'Diamond'
-        print d1.name
-        print d1
+        d1 = Diamond(sides=13, angle=45, name='Diamond', color='blue')
+        print(d1.shape_name())
+        print(d1.shape_area())
+        print(d1.shape_perimeter())
+        print(d1.shape_color())
 
-        print '-------------'
+        print('-------------')
 
-        t1 = Triangle(5, 7, 3)
-        t1.name = 'Triangle'
-        print t1.name
-        print t1
+        t1 = Triangle(side1=5, side2=7, side3=3, name='Triangle', color='purple')
+        print(t1.shape_name())
+        print(t1.shape_area())
+        print(t1.shape_perimeter())
+        print(t1.shape_color())
+
+        print('-------------')
     except Exception:
-        print traceback.print_exc()
+        print(traceback.print_exc())
         sys.exit(2)
     finally:
         sys.exit()
