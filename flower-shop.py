@@ -11,95 +11,82 @@
 # order more.
 # https://github.com/karan/Projects
 
-import sys
-import traceback
-import itertools
 
-
-class Flower:
-
-    def __init__(self, fl_id, name):
+class Flower(object):
+    def __init__(self, name, color, fl_id, **kwargs):
         self.name = name
-        # Set a Flower id in case it's needed in the future
+        self.color = color
         self.fl_id = fl_id
+        super(Flower, self).__init__(**kwargs)
 
     def flower_info(self):
-        return self.name
+        return [self.name, self.color, self.fl_id]
 
 
-class Bouquet:
-    bouquet_inventory = []
-    bouquet_onhand = {}
-
-    def create_bouquet(self, *fl):
-        new_bouquet = []
-        new_bouquet.extend(fl)
-        Bouquet.bouquet_inventory.append(list(itertools.chain.from_iterable(new_bouquet)))
-        Bouquet.bouquet_onhand.update({fl[0][0]: 1})
-
-    def sell_bouquet(self, b_id, amt):
-        for k, v in Bouquet.bouquet_onhand.iteritems():
-            if v <= 0 or v - amt < 0:
-                print "Can't sell any more {0}.".format(k)
-            elif v - amt < 0:
-                print "Not enough stock to sell {0} {1}.".format(amt, k)
-            else:
-                Bouquet.bouquet_onhand.update({b_id: v - amt})
-
-    def add_bouquet(self, b_id, amt):
-        for k, v in Bouquet.bouquet_onhand.iteritems():
-            Bouquet.bouquet_onhand.update({b_id: v + amt})
-
-    def show_bouquets(self):
-        print 'Catalogue:'
-        for each in Bouquet.bouquet_inventory:
-            print '{0}'.format(each)
-        print 'Quantity on hand:'
-        for k, v in Bouquet.bouquet_onhand.iteritems():
-            print '{0}: {1}'.format(k, v)
-            if v <= 1:
-                print 'Need to reorder {0}.'.format(k)
+class Bouquet(object):
+    def __init__(self, name, qty, flowers, b_id, **kwargs):
+        self.name = name
+        self.b_id = b_id
+        self.flowers = flowers
+        self.qty = qty
+        super(Bouquet, self).__init__(**kwargs)
 
 
-def main():
-    try:
-        manage_bouquets = Bouquet()
+fl1 = Flower(name='Rose', color='red', fl_id='r01')
+fl2 = Flower(name='Rose', color='white', fl_id='r02')
+fl3 = Flower(name='Rose', color='black', fl_id='r03')
+fl4 = Flower(name='Dandelion', color='yellow', fl_id='d01')
+fl5 = Flower(name='Tulip', color='pink', fl_id='t01')
+fl6 = Flower(name='Tulip', color='red', fl_id='t02')
+fl7 = Flower(name='Daisy', color='white', fl_id='da01')
+fl8 = Flower(name='Gardenia', color='white', fl_id='g01')
 
-        f1 = Flower('f1', 'Red Rose')
-        f2 = Flower('f2', 'White Lily')
-        f3 = Flower('f3', 'Yellow Lily')
-        f4 = Flower('f4', 'Pink Rose')
-        f5 = Flower('f5', 'Dandelion')
-        f6 = Flower('f6', 'Black Tulip')
-        f7 = Flower('f7', 'Red Tulip')
-        f8 = Flower('f8', 'White Daisy')
+print(fl1.flower_info())
+print(fl2.flower_info())
+print(fl3.flower_info())
+print(fl4.flower_info())
+print(fl5.flower_info())
+print(fl6.flower_info())
+print(fl7.flower_info())
+print(fl8.flower_info())
 
-        # Create the initial bouquets w/ default qty
-        manage_bouquets.create_bouquet(['b1'], [f1.flower_info(), f2.flower_info(), f5.flower_info()])
-        manage_bouquets.create_bouquet(['b2'], [f6.flower_info(), f8.flower_info()])
-        manage_bouquets.create_bouquet(['b3'], [f7.flower_info(), f3.flower_info(), f4.flower_info()])
+print('-------------')
 
-        # Show the catalogue with default qtys
-        manage_bouquets.show_bouquets()
+b1 = Bouquet(name='Birthday', qty=10, flowers=[fl1.flower_info(), 
+    fl4.flower_info(), fl8.flower_info()], b_id='bb01')
 
-        print '------------'
+print('Bouquet Name: {0}'.format(getattr(b1, 'name')))
+print('Bouquet ID#: {0}'.format(getattr(b1, 'b_id')))
+print('Bouquet Quantity: {0}'.format(getattr(b1, 'qty')))
+print('Bouquet Contents: {0}'.format(getattr(b1, 'flowers')))
 
-        # Adding and selling bouquets
-        manage_bouquets.sell_bouquet('b1', 1)
-        manage_bouquets.add_bouquet('b2', 3)
-        manage_bouquets.sell_bouquet('b3', 3)
+print('-------------')
 
-        print '------------'
+# Find out if you need to reorder
+print('Reorder?')
+if getattr(b1, 'qty') < 20:
+    print('reorder')
+else:
+    print('sufficient stock')
 
-        # Updated catalogue
-        manage_bouquets.show_bouquets()
+print('-------------')
 
-    except Exception:
-        print traceback.print_exc()
-        sys.exit(2)
-    finally:
-        sys.exit()
+# Sell bouquets
+print('Sell a bouquet (1)')
+setattr(b1, 'qty', (b1.qty-1))
+print('Bouquet Quantity: {0}'.format(getattr(b1, 'qty')))
 
+print('-------------')
 
-if __name__ == '__main__':
-    main()
+# Add bouquets
+print('Add more bouquets (11)')
+setattr(b1, 'qty', (b1.qty+11))
+print('Bouquet Quantity: {0}'.format(getattr(b1, 'qty')))
+
+print('-------------')
+
+print('Reorder?')
+if getattr(b1, 'qty') < 20:
+    print('reorder')
+else:
+    print('sufficient stock')
