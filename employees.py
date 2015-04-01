@@ -33,7 +33,7 @@ class Employee(object):
     def employee_type(self):
         return 'Employee Type: {0}'.format(self.emp_type)
 
-    def year_to_date(self):
+    def pay_year_end(self):
         give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
         self.total_pay = give_raise + self.bonus
         return 'Total Pay: {0}'.format(self.total_pay)
@@ -45,7 +45,7 @@ class HourlyEmployee(Employee):
         self.wk_hours = wk_hours
         super(HourlyEmployee, self).__init__(**kwargs)
 
-    def year_to_date(self):
+    def pay_year_end(self):
         base_year = (self.pay_hour * self.wk_hours) * 52
         give_raise = (base_year * pct_to_dec(self.pay_raise)) + base_year
         self.total_pay = give_raise + self.bonus
@@ -70,69 +70,59 @@ class Executive(Employee):
         super(Executive, self).__init__(**kwargs)
 
 
-class Company:
-    status_hired = []
-    status_fired = []
+class Company(object):
+    def __init__(self, staff_list, **kwargs):
+        self.staff_list = staff_list
+        super(Company, self).__init__(**kwargs)
 
-    def hired(self, emp_name):
-        Company.status_hired.append(emp_name)
-
-    def fired(self, emp_name):
-        Company.status_fired.append(emp_name)
-        Company.status_hired.remove(emp_name)
-
-    def show_status_hired(self):
-        print('Hired:')
-        for each in Company.status_hired:
-            print('{0}'.format(each))
-
-    def show_status_fired(self):
-        print('Fired:')
-        for each in Company.status_fired:
-            print('{0}'.format(each))
-
-
-company_stuff = Company()
 
 he1 = HourlyEmployee(pay_hour=10.00, bonus=2000, wk_hours=20, 
     pay_raise=2.00, emp_name='Fluffy', emp_type='Hourly Employee')
-company_stuff.hired(he1.employee_name())
-print(he1.employee_name())
-print(he1.employee_type())
-print(he1.year_to_date())
-
-print('-------------')
-
 se1 = SalariedEmployee(emp_name='Mittens', emp_type='Salaried Employee', 
     bonus=5000, pay_raise=2.0, pay_year=35000)
-company_stuff.hired(se1.employee_name())
-print(se1.employee_name())
-print(se1.employee_type())
-print(se1.year_to_date())
-
-print('-------------')
-
 m1 = Manager(emp_name='Chirpy', emp_type='Manager', 
     bonus=7000, pay_raise=3.5, pay_year=50000)
-company_stuff.hired(m1.employee_name())
-print(m1.employee_name())
-print(m1.employee_type())
-print(m1.year_to_date())
-company_stuff.fired(m1.employee_name())
-
-print('-------------')
-
 e1 = Manager(emp_name='Snowball', emp_type='Executive', 
     bonus=10000, pay_raise=5.0, pay_year=100000)
-company_stuff.hired(e1.employee_name())
+
+# Hire employees
+staff = Company(staff_list=[])
+staff.staff_list.append(he1.employee_name())
+staff.staff_list.append(se1.employee_name())
+staff.staff_list.append(m1.employee_name())
+staff.staff_list.append(e1.employee_name())
+
+print('Hired:')
+print(staff.staff_list)
+
+print('-------------')
+
+print(he1.employee_name())
+print(he1.employee_type())
+print(he1.pay_year_end())
+
+print('-------------')
+
+print(se1.employee_name())
+print(se1.employee_type())
+print(se1.pay_year_end())
+
+print('-------------')
+
+print(m1.employee_name())
+print(m1.employee_type())
+print(m1.pay_year_end())
+
+print('-------------')
+
 print(e1.employee_name())
 print(e1.employee_type())
-print(e1.year_to_date())
+print(e1.pay_year_end())
 
 print('-------------')
 
-company_stuff.show_status_hired()
+# Fire employees
+staff.staff_list.remove(m1.employee_name())
 
-print('-------------')
-
-company_stuff.show_status_fired()
+print('Current Staff:')
+print(staff.staff_list)
