@@ -11,9 +11,6 @@
 # track of various products and can sum up the Inventory value.
 # https://github.com/karan/Projects
 
-import traceback
-import sys
-
 
 class Product:
 
@@ -53,26 +50,14 @@ class Inventory:
         print('Total Inventory value: ${0}'.format(sum(total_value)))
 
 
-def main():
-    try:
-        track_inventory = Inventory()
+track_inventory = Inventory()
 
-        p1 = Product(5.00, 1234, 12, 'Apples')
-        track_inventory.add_prod(p1)
+p1 = Product(5.00, 1234, 12, 'Apples')
+track_inventory.add_prod(p1)
 
-        p2 = Product(3.00, 4321, 13, 'Oranges')
-        track_inventory.add_prod(p2)
+p2 = Product(3.00, 4321, 13, 'Oranges')
+track_inventory.add_prod(p2)
 
-        track_inventory.show_inventory()
-        track_inventory.total_inventory()
-        track_inventory.total_inventory_value()
-
-    except Exception:
-        print(traceback.print_exc())
-        sys.exit(2)
-    finally:
-        sys.exit()
-
-
-if __name__ == '__main__':
-    main()
+track_inventory.show_inventory()
+track_inventory.total_inventory()
+track_inventory.total_inventory_value()

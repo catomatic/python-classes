@@ -85,6 +85,7 @@ print('Bouquet Quantity: {0}'.format(getattr(b1, 'qty')))
 
 print('-------------')
 
+# Find out if you need to reorder
 print('Reorder?')
 if getattr(b1, 'qty') < 20:
     print('reorder')

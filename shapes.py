@@ -11,8 +11,6 @@
 # handle each shape type.
 # https://github.com/karan/Projects
 
-import traceback
-import sys
 import math
 
 
@@ -83,54 +81,41 @@ class Triangle(Shape):
         super(Triangle, self).__init__(**kwargs)
 
 
-def main():
-    try:
-        r1 = Rectangle(width=10, height=6, name='Rectangle', color='red')
-        print(r1.shape_name())
-        print(r1.shape_area())
-        print(r1.shape_perimeter())
-        print(r1.shape_color())
+r1 = Rectangle(width=10, height=6, name='Rectangle', color='red')
+print(r1.shape_name())
+print(r1.shape_area())
+print(r1.shape_perimeter())
+print(r1.shape_color())
 
-        print('-------------')
+print('-------------')
 
-        s1 = Square(sides=10, name='Square', color='yellow')
-        print(s1.shape_name())
-        print(s1.shape_area())
-        print(s1.shape_perimeter())
-        print(s1.shape_color())
+s1 = Square(sides=10, name='Square', color='yellow')
+print(s1.shape_name())
+print(s1.shape_area())
+print(s1.shape_perimeter())
+print(s1.shape_color())
 
-        print('-------------')
+print('-------------')
 
-        c1 = Circle(radius=8, name='Circle', color='green')
-        print(c1.shape_name())
-        print(c1.shape_area())
-        print(c1.shape_perimeter())
-        print(c1.shape_color())
+c1 = Circle(radius=8, name='Circle', color='green')
+print(c1.shape_name())
+print(c1.shape_area())
+print(c1.shape_perimeter())
+print(c1.shape_color())
 
-        print('-------------')
+print('-------------')
 
-        d1 = Diamond(sides=13, angle=45, name='Diamond', color='blue')
-        print(d1.shape_name())
-        print(d1.shape_area())
-        print(d1.shape_perimeter())
-        print(d1.shape_color())
+d1 = Diamond(sides=13, angle=45, name='Diamond', color='blue')
+print(d1.shape_name())
+print(d1.shape_area())
+print(d1.shape_perimeter())
+print(d1.shape_color())
 
-        print('-------------')
+print('-------------')
 
-        t1 = Triangle(side1=5, side2=7, side3=3, name='Triangle', 
-            color='purple')
-        print(t1.shape_name())
-        print(t1.shape_area())
-        print(t1.shape_perimeter())
-        print(t1.shape_color())
-
-        print('-------------')
-    except Exception:
-        print(traceback.print_exc())
-        sys.exit(2)
-    finally:
-        sys.exit()
-
-
-if __name__ == '__main__':
-    main()
+t1 = Triangle(side1=5, side2=7, side3=3, name='Triangle', 
+    color='purple')
+print(t1.shape_name())
+print(t1.shape_area())
+print(t1.shape_perimeter())
+print(t1.shape_color())

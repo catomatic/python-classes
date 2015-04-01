@@ -12,9 +12,6 @@
 # manage the employees. You should be able to hire, fire and raise employees.
 # https://github.com/karan/Projects
 
-import sys
-import traceback
-
 
 def pct_to_dec(num):
     # Function to convert percent to decimal
@@ -95,59 +92,47 @@ class Company:
             print('{0}'.format(each))
 
 
-def main():
-    try:
+company_stuff = Company()
 
-        company_stuff = Company()
+he1 = HourlyEmployee(pay_hour=10.00, bonus=2000, wk_hours=20, 
+    pay_raise=2.00, emp_name='Fluffy', emp_type='Hourly Employee')
+company_stuff.hired(he1.employee_name())
+print(he1.employee_name())
+print(he1.employee_type())
+print(he1.year_to_date())
 
-        he1 = HourlyEmployee(pay_hour=10.00, bonus=2000, wk_hours=20, 
-            pay_raise=2.00, emp_name='Fluffy', emp_type='Hourly Employee')
-        company_stuff.hired(he1.employee_name())
-        print(he1.employee_name())
-        print(he1.employee_type())
-        print(he1.year_to_date())
+print('-------------')
 
-        print('-------------')
+se1 = SalariedEmployee(emp_name='Mittens', emp_type='Salaried Employee', 
+    bonus=5000, pay_raise=2.0, pay_year=35000)
+company_stuff.hired(se1.employee_name())
+print(se1.employee_name())
+print(se1.employee_type())
+print(se1.year_to_date())
 
-        se1 = SalariedEmployee(emp_name='Mittens', emp_type='Salaried Employee', 
-            bonus=5000, pay_raise=2.0, pay_year=35000)
-        company_stuff.hired(se1.employee_name())
-        print(se1.employee_name())
-        print(se1.employee_type())
-        print(se1.year_to_date())
+print('-------------')
 
-        print('-------------')
+m1 = Manager(emp_name='Chirpy', emp_type='Manager', 
+    bonus=7000, pay_raise=3.5, pay_year=50000)
+company_stuff.hired(m1.employee_name())
+print(m1.employee_name())
+print(m1.employee_type())
+print(m1.year_to_date())
+company_stuff.fired(m1.employee_name())
 
-        m1 = Manager(emp_name='Chirpy', emp_type='Manager', 
-            bonus=7000, pay_raise=3.5, pay_year=50000)
-        company_stuff.hired(m1.employee_name())
-        print(m1.employee_name())
-        print(m1.employee_type())
-        print(m1.year_to_date())
-        company_stuff.fired(m1.employee_name())
+print('-------------')
 
-        print('-------------')
+e1 = Manager(emp_name='Snowball', emp_type='Executive', 
+    bonus=10000, pay_raise=5.0, pay_year=100000)
+company_stuff.hired(e1.employee_name())
+print(e1.employee_name())
+print(e1.employee_type())
+print(e1.year_to_date())
 
-        e1 = Manager(emp_name='Snowball', emp_type='Executive', 
-            bonus=10000, pay_raise=5.0, pay_year=100000)
-        company_stuff.hired(e1.employee_name())
-        print(e1.employee_name())
-        print(e1.employee_type())
-        print(e1.year_to_date())
+print('-------------')
 
-        print('-------------')
+company_stuff.show_status_hired()
 
-        company_stuff.show_status_hired()
+print('-------------')
 
-        print('-------------')
-
-        company_stuff.show_status_fired()
-    except Exception:
-        print(traceback.print_exc())
-        sys.exit(2)
-    finally:
-        sys.exit()
-
-
-if __name__ == '__main__':
-    main()
+company_stuff.show_status_fired()

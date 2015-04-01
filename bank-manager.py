@@ -11,9 +11,6 @@
 # style program.
 # https://github.com/karan/Projects
 
-import sys
-import traceback
-
 
 def pct_to_dec(num):
     # Function to convert percent to decimal
@@ -74,69 +71,57 @@ class BusinessAccount(Account):
             self.balance -= amount
 
 
-def main():
-    try:
-        ca1 = CheckingAccount()
-        ca1.type = 'Checking Account'
-        print(ca1.type)
-        print(ca1)
-        ca1.credit(100)
-        print(ca1)
-        ca1.credit(100)
-        print(ca1)
-        ca1.credit(500)
-        print(ca1)
-        ca1.debit(100)
-        print(ca1)
-        ca1.debit(700)
-        print(ca1)
-        ca1.credit(500)
-        print(ca1)
+ca1 = CheckingAccount()
+ca1.type = 'Checking Account'
+print(ca1.type)
+print(ca1)
+ca1.credit(100)
+print(ca1)
+ca1.credit(100)
+print(ca1)
+ca1.credit(500)
+print(ca1)
+ca1.debit(100)
+print(ca1)
+ca1.debit(700)
+print(ca1)
+ca1.credit(500)
+print(ca1)
 
-        print '-------------'
+print '-------------'
 
-        sa1 = SavingsAccount()
-        sa1.type = 'Savings Account'
-        print(sa1.type)
-        print(sa1)
-        sa1.credit(5000)
-        print(sa1)
-        sa1.add_interest(3)
-        print(sa1)
-        sa1.add_interest(3)
-        print(sa1)
-        sa1.credit(100)
-        print(sa1)
-        sa1.debit(600)
-        print(sa1)
-        sa1.debit(5000)
-        print(sa1)
-        sa1.debit(4804.5)
-        print(sa1)
-        sa1.debit(100)
-        print(sa1)
-        sa1.credit(5000)
-        print(sa1)
+sa1 = SavingsAccount()
+sa1.type = 'Savings Account'
+print(sa1.type)
+print(sa1)
+sa1.credit(5000)
+print(sa1)
+sa1.add_interest(3)
+print(sa1)
+sa1.add_interest(3)
+print(sa1)
+sa1.credit(100)
+print(sa1)
+sa1.debit(600)
+print(sa1)
+sa1.debit(5000)
+print(sa1)
+sa1.debit(4804.5)
+print(sa1)
+sa1.debit(100)
+print(sa1)
+sa1.credit(5000)
+print(sa1)
 
-        print '-------------'
+print '-------------'
 
-        ba1 = BusinessAccount()
-        ba1.type = 'Business Account'
-        print(ba1.type)
-        print(ba1)
-        ba1.credit(1000)
-        print(ba1)
-        ba1.debit(2000)
-        print(ba1)
-        ba1.add_interest(3)
-        print(ba1)
-
-    except Exception:
-        print(traceback.print_exc())
-        sys.exit(2)
-    finally:
-        sys.exit()
-
-
-if __name__ == '__main__':
-    main()
+ba1 = BusinessAccount()
+ba1.type = 'Business Account'
+print(ba1.type)
+print(ba1)
+ba1.credit(1000)
+print(ba1)
+ba1.debit(2000)
+print(ba1)
+ba1.add_interest(3)
+print(ba1)
