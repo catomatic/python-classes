@@ -23,12 +23,12 @@ def pct_to_dec(num):
 
 
 class Employee(object):
-    def __init__(self, emp_name, emp_type, bonus, pay_raise, **kwds):
+    def __init__(self, emp_name, emp_type, bonus, pay_raise, **kwargs):
         self.emp_name = emp_name
         self.emp_type = emp_type
         self.bonus = bonus
         self.pay_raise = pay_raise
-        super(Employee, self).__init__(**kwds)
+        super(Employee, self).__init__(**kwargs)
 
     def employee_name(self):
         return 'Employee Name: {0}'.format(self.emp_name)
@@ -43,10 +43,10 @@ class Employee(object):
 
 
 class HourlyEmployee(Employee):
-    def __init__(self, pay_hour, wk_hours, **kwds):
+    def __init__(self, pay_hour, wk_hours, **kwargs):
         self.pay_hour = pay_hour
         self.wk_hours = wk_hours
-        super(HourlyEmployee, self).__init__(**kwds)
+        super(HourlyEmployee, self).__init__(**kwargs)
 
     def year_to_date(self):
         base_year = (self.pay_hour * self.wk_hours) * 52
@@ -56,21 +56,21 @@ class HourlyEmployee(Employee):
 
 
 class SalariedEmployee(Employee):
-    def __init__(self, pay_year, **kwds):
+    def __init__(self, pay_year, **kwargs):
         self.pay_year = pay_year
-        super(SalariedEmployee, self).__init__(**kwds)
+        super(SalariedEmployee, self).__init__(**kwargs)
 
 
 class Manager(Employee):
-    def __init__(self, pay_year, **kwds):
+    def __init__(self, pay_year, **kwargs):
         self.pay_year = pay_year
-        super(Manager, self).__init__(**kwds)
+        super(Manager, self).__init__(**kwargs)
 
 
 class Executive(Employee):
-    def __init__(self, pay_year, **kwds):
+    def __init__(self, pay_year, **kwargs):
         self.pay_year = pay_year
-        super(Executive, self).__init__(**kwds)
+        super(Executive, self).__init__(**kwargs)
 
 
 class Company:

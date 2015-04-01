@@ -30,10 +30,10 @@ def herons(p, s1, s2, s3):
 
 
 class Shape(object):
-    def __init__(self, name, color, **kwds):
+    def __init__(self, name, color, **kwargs):
         self.name = name
         self.color = color
-        super(Shape, self).__init__(**kwds)
+        super(Shape, self).__init__(**kwargs)
 
     def shape_name(self):
         return 'Name: {0}'.format(self.name)
@@ -49,38 +49,38 @@ class Shape(object):
 
 
 class Rectangle(Shape):
-    def __init__(self, width, height, **kwds):
+    def __init__(self, width, height, **kwargs):
         self.area = width * height
         self.perimeter = (width * 2) + (height * 2)
-        super(Rectangle, self).__init__(**kwds)
+        super(Rectangle, self).__init__(**kwargs)
 
 
 class Square(Shape):
-    def __init__(self, sides, **kwds):
+    def __init__(self, sides, **kwargs):
         self.area = squared(sides)
         self.perimeter = sides * 4
-        super(Square, self).__init__(**kwds)
+        super(Square, self).__init__(**kwargs)
 
 
 class Circle(Shape):
-    def __init__(self, radius, **kwds):
+    def __init__(self, radius, **kwargs):
         self.area = round(math.pi * squared(radius), 2)
         self.perimeter = round((2 * math.pi) * radius, 2)
-        super(Circle, self).__init__(**kwds)
+        super(Circle, self).__init__(**kwargs)
 
 
 class Diamond(Shape):
-    def __init__(self, sides, angle, **kwds):
+    def __init__(self, sides, angle, **kwargs):
         self.area = round(squared(sides) * math.sin(angle), 2)
         self.perimeter = sides * 4
-        super(Diamond, self).__init__(**kwds)
+        super(Diamond, self).__init__(**kwargs)
 
 
 class Triangle(Shape):
-    def __init__(self, side1, side2, side3, **kwds):
+    def __init__(self, side1, side2, side3, **kwargs):
         self.perimeter = side1 + side2 + side3
         self.area = herons(self.perimeter, side1, side2, side3)
-        super(Triangle, self).__init__(**kwds)
+        super(Triangle, self).__init__(**kwargs)
 
 
 def main():
@@ -117,7 +117,8 @@ def main():
 
         print('-------------')
 
-        t1 = Triangle(side1=5, side2=7, side3=3, name='Triangle', color='purple')
+        t1 = Triangle(side1=5, side2=7, side3=3, name='Triangle', 
+            color='purple')
         print(t1.shape_name())
         print(t1.shape_area())
         print(t1.shape_perimeter())
