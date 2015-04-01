@@ -22,122 +22,128 @@ def pct_to_dec(num):
     return dec
 
 
-class Employee:    
-    def __init__(self, total_pay):
-        self.total_pay
+class Employee(object):
+    def __init__(self, emp_name, emp_type, bonus, pay_raise, **kwds):
+        self.emp_name = emp_name
+        self.emp_type = emp_type
+        self.bonus = bonus
+        self.pay_raise = pay_raise
+        super(Employee, self).__init__(**kwds)
 
-    def __str__(self):
-        return 'Total pay: {0}'.format(self.total_pay)
+    def employee_name(self):
+        return 'Employee Name: {0}'.format(self.emp_name)
+
+    def employee_type(self):
+        return 'Employee Type: {0}'.format(self.emp_type)
+
+    def year_to_date(self):
+        give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
+        self.total_pay = give_raise + self.bonus
+        return 'Total Pay: {0}'.format(self.total_pay)
 
 
 class HourlyEmployee(Employee):
-    def __init__(self, pay_hour, bonus, wk_hours, pay_raise):
-        base_year = (pay_hour * wk_hours) * 52
-        give_raise = (base_year * pct_to_dec(pay_raise)) + base_year
-        self.total_pay = give_raise + bonus
+    def __init__(self, pay_hour, wk_hours, **kwds):
+        self.pay_hour = pay_hour
+        self.wk_hours = wk_hours
+        super(HourlyEmployee, self).__init__(**kwds)
+
+    def year_to_date(self):
+        base_year = (self.pay_hour * self.wk_hours) * 52
+        give_raise = (base_year * pct_to_dec(self.pay_raise)) + base_year
+        self.total_pay = give_raise + self.bonus
+        return 'Total Pay: {0}'.format(self.total_pay)
 
 
 class SalariedEmployee(Employee):
-    def __init__(self, pay_year, bonus, pay_raise):
-        give_raise = (pay_year * pct_to_dec(pay_raise)) + pay_year
-        self.total_pay = give_raise + bonus
+    def __init__(self, pay_year, **kwds):
+        self.pay_year = pay_year
+        super(SalariedEmployee, self).__init__(**kwds)
 
 
 class Manager(Employee):
-    def __init__(self, pay_year, bonus, pay_raise):
-        give_raise = (pay_year * pct_to_dec(pay_raise)) + pay_year
-        self.total_pay = give_raise + bonus
+    def __init__(self, pay_year, **kwds):
+        self.pay_year = pay_year
+        super(Manager, self).__init__(**kwds)
 
 
 class Executive(Employee):
-    def __init__(self, pay_year, bonus, pay_raise):
-        give_raise = (pay_year * pct_to_dec(pay_raise)) + pay_year
-        self.total_pay = give_raise + bonus
+    def __init__(self, pay_year, **kwds):
+        self.pay_year = pay_year
+        super(Executive, self).__init__(**kwds)
 
 
-class company:
-    __status_hired = []
-    __status_fired = []
+class Company:
+    status_hired = []
+    status_fired = []
 
     def hired(self, emp_name):
-        company.__status_hired.append(emp_name)
+        Company.status_hired.append(emp_name)
 
     def fired(self, emp_name):
-        company.__status_fired.append(emp_name)
-        company.__status_hired.remove(emp_name)
+        Company.status_fired.append(emp_name)
+        Company.status_hired.remove(emp_name)
 
     def show_status_hired(self):
-        print 'Hired:'
-        for each in company.__status_hired:
-            print '{0}'.format(each)
+        print('Hired:')
+        for each in Company.status_hired:
+            print('{0}'.format(each))
 
     def show_status_fired(self):
-        print 'Fired:'
-        for each in company.__status_fired:
-            print '{0}'.format(each)
+        print('Fired:')
+        for each in Company.status_fired:
+            print('{0}'.format(each))
 
 
 def main():
     try:
-        company_stuff = company()
 
-        he1 = HourlyEmployee(12, 1000, 30, 5)
-        he1.emp_name = 'Mittens'
-        he1.emp_type = 'Hourly Employee'
-        print he1.emp_name
-        print he1.emp_type
-        print he1
-        company_stuff.hired(he1.emp_name)
-        print '-------------'
+        company_stuff = Company()
 
-        he2 = HourlyEmployee(12, 0, 30, 0)
-        he2.emp_name = 'Chirpy'
-        he2.emp_type = 'Hourly Employee'
-        print he2.emp_name
-        print he2.emp_type
-        print he2
-        he2.bonus = 200
-        he2.pay_raise = 5
-        print he2
-        company_stuff.hired(he2.emp_name)
-        print '-------------'
+        he1 = HourlyEmployee(pay_hour=10.00, bonus=2000, wk_hours=20, 
+            pay_raise=2.00, emp_name='Fluffy', emp_type='Hourly Employee')
+        company_stuff.hired(he1.employee_name())
+        print(he1.employee_name())
+        print(he1.employee_type())
+        print(he1.year_to_date())
 
-        se1 = SalariedEmployee(45000, 500, 2)
-        se1.emp_name = 'Fluffy'
-        se1.emp_type = 'Salaried Employee'
-        print se1.emp_name
-        print se1.emp_type
-        print se1
-        company_stuff.hired(se1.emp_name)
-        print '-------------'
+        print('-------------')
 
-        m1 = Manager(80000, 2000, 1)
-        m1.emp_name = 'Flipper'
-        m1.emp_type = 'Manager'
-        print m1.emp_name
-        print m1.emp_type
-        print m1
-        company_stuff.hired(m1.emp_name)
-        print '-------------'
+        se1 = SalariedEmployee(emp_name='Mittens', emp_type='Salaried Employee', 
+            bonus=5000, pay_raise=2.0, pay_year=35000)
+        company_stuff.hired(se1.employee_name())
+        print(se1.employee_name())
+        print(se1.employee_type())
+        print(se1.year_to_date())
 
-        ex1 = Executive(120000, 10000, 5)
-        ex1.emp_name = 'Rufus'
-        ex1.emp_type = 'Executive'
-        print ex1.emp_name
-        print ex1.emp_type
-        print ex1
-        company_stuff.hired(ex1.emp_name)
-        print '-------------'
+        print('-------------')
+
+        m1 = Manager(emp_name='Chirpy', emp_type='Manager', 
+            bonus=7000, pay_raise=3.5, pay_year=50000)
+        company_stuff.hired(m1.employee_name())
+        print(m1.employee_name())
+        print(m1.employee_type())
+        print(m1.year_to_date())
+        company_stuff.fired(m1.employee_name())
+
+        print('-------------')
+
+        e1 = Manager(emp_name='Snowball', emp_type='Executive', 
+            bonus=10000, pay_raise=5.0, pay_year=100000)
+        company_stuff.hired(e1.employee_name())
+        print(e1.employee_name())
+        print(e1.employee_type())
+        print(e1.year_to_date())
+
+        print('-------------')
 
         company_stuff.show_status_hired()
-        company_stuff.show_status_fired()
-        company_stuff.fired(he1.emp_name)
 
-        print '-------------'
-        company_stuff.show_status_hired()
+        print('-------------')
+
         company_stuff.show_status_fired()
     except Exception:
-        print traceback.print_exc()
+        print(traceback.print_exc())
         sys.exit(2)
     finally:
         sys.exit()
