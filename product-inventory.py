@@ -28,29 +28,29 @@ class Product:
 
 
 class Inventory:
-    __products_list = []
+    products_list = []
 
     def add_prod(self, prod):
-        Inventory.__products_list.append(prod.product_info())
+        Inventory.products_list.append(prod.product_info())
 
     def del_prod(self, prod):
-        Inventory.__products_list.remove(prod.product_info())
+        Inventory.products_list.remove(prod.product_info())
 
     def show_inventory(self):
-        for each in Inventory.__products_list:
-            print each
+        for each in Inventory.products_list:
+            print(each)
 
     def total_inventory(self):
-        __total = []
-        for each in Inventory.__products_list:
-            __total.append(each[2])
-        print 'Total Inventory: {0}'.format(sum(__total))
+        total = []
+        for each in Inventory.products_list:
+            total.append(each[2])
+        print('Total Inventory: {0}'.format(sum(total)))
 
     def total_inventory_value(self):
-        __total_value = []
-        for each in Inventory.__products_list:
-            __total_value.append(each[0])
-        print 'Total Inventory value: ${0}'.format(sum(__total_value))
+        total_value = []
+        for each in Inventory.products_list:
+            total_value.append(each[0])
+        print('Total Inventory value: ${0}'.format(sum(total_value)))
 
 
 def main():
@@ -68,7 +68,7 @@ def main():
         track_inventory.total_inventory_value()
 
     except Exception:
-        print traceback.print_exc()
+        print(traceback.print_exc())
         sys.exit(2)
     finally:
         sys.exit()
