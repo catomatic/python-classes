@@ -1,35 +1,25 @@
 # Python Classes
 
-Author: catomatic
+### Source file: shapes.py
 
-Website: https://github.com/catomatic
+Various shapes inheriting from Shape.
 
-### Shape Area and Perimeter Classes
+### Source file: employees.py
 
-Source file: shapes.py
+Various employee types inheriting from Employee.
 
-Abstract class "shape" and various other shapes inheriting from shape to calculate area and perimeter.
+### Source file: product-inventory.py
 
-### Company Manager
+Product and Inventory classes.
 
-Source file: employees.py
+### Source file: flower-shop.py
 
-Abstract class "employee" and employee type classes inheriting from employee to calculate wages. Includes a "company" class to hire and fire employees.
+Flower and Bouquet objects along with selling, adding, and keeping track of reordering.
 
-### Product Inventory Project
+### Source file: bank-manager.py
 
-Source file: product-inventory.py
+Various account types inheriting from Account.
 
-Class "product" creates product instances and class "inventory" manages them.
+#### Updates
 
-### Flower Shop Ordering To Go
-
-Source file: flower-shop.py
-
-Class "flower" creates flower instances and class "bouquet" organizes them into bouquets. The bouquet class allows adding more bouquets and selling them and prints alerts when the stock is too low or bouquets can't be sold.
-
-### Bank Account Manager
-
-Source file: bank-manager.py
-
-Abstract class "account" and bank account type classes inheriting from account to handle debits, credits, minimum balances, overdraft charges, interest rates, and total balance.
+03/01/2015: Better class designs on most, Python 3.4 and Python 2.7 support on all
