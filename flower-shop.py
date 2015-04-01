@@ -52,8 +52,10 @@ print(fl8.flower_info())
 
 print('-------------')
 
-b1 = Bouquet(name='Birthday', qty=10, flowers=[fl1.flower_info(), 
-    fl4.flower_info(), fl8.flower_info()], b_id='bb01')
+b1 = Bouquet(name='Birthday', qty=10, flowers=[], b_id='bb01')
+b1.flowers.append(fl1.flower_info())
+b1.flowers.append(fl4.flower_info())
+b1.flowers.append(fl8.flower_info())
 
 print('Bouquet Name: {0}'.format(getattr(b1, 'name')))
 print('Bouquet ID#: {0}'.format(getattr(b1, 'b_id')))
