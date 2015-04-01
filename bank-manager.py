@@ -21,8 +21,7 @@ def pct_to_dec(num):
     return dec
 
 
-class Account:    
-
+class Account:
     def __init__(self, balance):
         self.balance = balance
 
@@ -40,7 +39,6 @@ class Account:
 
 
 class CheckingAccount(Account):
-
     def __init__(self):
         self.balance = 0
 
@@ -48,32 +46,30 @@ class CheckingAccount(Account):
         self.balance -= amount
         if self.balance < 0:
             self.balance -= 35
-            print 'You have been charged an overdraft fee.'
+            print('You have been charged an overdraft fee.')
 
 
 class SavingsAccount(Account):
-
     def __init__(self):
         self.balance = 0
 
     def debit(self, amount):
         if self.balance <= 0:
-            print 'Balance too low.'
+            print('Balance too low.')
         elif self.balance - amount < 0:
-            print 'Debit amount too high.'
+            print('Debit amount too high.')
         else:
             self.balance -= amount
 
 
 class BusinessAccount(Account):
-    min_balance = 5000
-
     def __init__(self):
+        self.min_balance = 5000
         self.balance = 5000
 
     def debit(self, amount):
-        if self.balance - amount < BusinessAccount.min_balance:
-            print 'Must maintain ${0} minimum balance'.format(BusinessAccount.min_balance)
+        if self.balance - amount < self.min_balance:
+            print('Must maintain ${0} minimum balance'.format(self.min_balance))
         else:
             self.balance -= amount
 
@@ -82,61 +78,61 @@ def main():
     try:
         ca1 = CheckingAccount()
         ca1.type = 'Checking Account'
-        print ca1.type
-        print ca1
+        print(ca1.type)
+        print(ca1)
         ca1.credit(100)
-        print ca1
+        print(ca1)
         ca1.credit(100)
-        print ca1
+        print(ca1)
         ca1.credit(500)
-        print ca1
+        print(ca1)
         ca1.debit(100)
-        print ca1
+        print(ca1)
         ca1.debit(700)
-        print ca1
+        print(ca1)
         ca1.credit(500)
-        print ca1
+        print(ca1)
 
         print '-------------'
 
         sa1 = SavingsAccount()
         sa1.type = 'Savings Account'
-        print sa1.type
-        print sa1
+        print(sa1.type)
+        print(sa1)
         sa1.credit(5000)
-        print sa1
+        print(sa1)
         sa1.add_interest(3)
-        print sa1
+        print(sa1)
         sa1.add_interest(3)
-        print sa1
+        print(sa1)
         sa1.credit(100)
-        print sa1
+        print(sa1)
         sa1.debit(600)
-        print sa1
+        print(sa1)
         sa1.debit(5000)
-        print sa1
+        print(sa1)
         sa1.debit(4804.5)
-        print sa1
+        print(sa1)
         sa1.debit(100)
-        print sa1
+        print(sa1)
         sa1.credit(5000)
-        print sa1
+        print(sa1)
 
         print '-------------'
 
         ba1 = BusinessAccount()
         ba1.type = 'Business Account'
-        print ba1.type
-        print ba1
+        print(ba1.type)
+        print(ba1)
         ba1.credit(1000)
-        print ba1
+        print(ba1)
         ba1.debit(2000)
-        print ba1
+        print(ba1)
         ba1.add_interest(3)
-        print ba1
+        print(ba1)
 
     except Exception:
-        print traceback.print_exc()
+        print(traceback.print_exc())
         sys.exit(2)
     finally:
         sys.exit()
