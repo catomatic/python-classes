@@ -22,4 +22,4 @@ Various account types inheriting from Account.
 
 #### Updates
 
-03/01/2015: Better class designs on most, Python 3.4 and Python 2.7 support on all
+04/01/2015: Better class designs on most, Python 3.4 and Python 2.7 support on all
