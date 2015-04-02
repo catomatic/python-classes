@@ -18,110 +18,81 @@ def pct_to_dec(num):
     return dec
 
 
-class Account:
-    def __init__(self, balance):
+class Account(object):
+    def __init__(self, balance, int_rate, act_type, min_balance, **kwargs):
         self.balance = balance
-
-    def credit(self, amount):
-        self.balance += amount
-
-    def debit(self):
-        return self.balance
-
-    def add_interest(self, int_rate):
-        self.balance = self.balance * pct_to_dec(int_rate) + self.balance
+        self.int_rate = int_rate
+        self.act_type = act_type
+        self.min_balance = min_balance
+        super(Account, self).__init__(**kwargs)
 
     def __str__(self):
-        return '${0}'.format(self.balance)
+        # Charge $25 fee if balance drops below minimum
+        if self.balance < self.min_balance:
+            self.balance -= 25
+        # Add interest
+        self.balance += round(self.balance * pct_to_dec(self.int_rate), 2)
+        return '{0}: ${1}'.format(self.act_type, self.balance)
 
 
 class CheckingAccount(Account):
-    def __init__(self):
-        self.balance = 0
-
-    def debit(self, amount):
-        self.balance -= amount
-        if self.balance < 0:
-            self.balance -= 35
-            print('You have been charged an overdraft fee.')
+    def __init__(self, **kwargs):
+        super(CheckingAccount, self).__init__(**kwargs)
 
 
 class SavingsAccount(Account):
-    def __init__(self):
-        self.balance = 0
-
-    def debit(self, amount):
-        if self.balance <= 0:
-            print('Balance too low.')
-        elif self.balance - amount < 0:
-            print('Debit amount too high.')
-        else:
-            self.balance -= amount
+    def __init__(self, **kwargs):
+        super(SavingsAccount, self).__init__(**kwargs)
 
 
 class BusinessAccount(Account):
-    def __init__(self):
-        self.min_balance = 5000
-        self.balance = 5000
-
-    def debit(self, amount):
-        if self.balance - amount < self.min_balance:
-            print('Must maintain ${0} minimum balance'.format(self.min_balance))
-        else:
-            self.balance -= amount
+    def __init__(self, **kwargs):
+        super(BusinessAccount, self).__init__(**kwargs)
 
 
-ca1 = CheckingAccount()
-ca1.type = 'Checking Account'
-print(ca1.type)
-print(ca1)
-ca1.credit(100)
-print(ca1)
-ca1.credit(100)
-print(ca1)
-ca1.credit(500)
-print(ca1)
-ca1.debit(100)
-print(ca1)
-ca1.debit(700)
-print(ca1)
-ca1.credit(500)
-print(ca1)
+ca1 = CheckingAccount(balance=500, int_rate=0.25, act_type='Checking Account', 
+    min_balance=0)
+sa1 = SavingsAccount(balance=50, int_rate=0.50, act_type='Savings Account', 
+    min_balance=0)
+ba1 = BusinessAccount(balance=4000, int_rate=0.75, act_type='Business Account', 
+    min_balance=5000)
 
-print '-------------'
-
-sa1 = SavingsAccount()
-sa1.type = 'Savings Account'
-print(sa1.type)
+# Month #1 statement, initial deposits plus interest
+print(ca1)
 print(sa1)
-sa1.credit(5000)
-print(sa1)
-sa1.add_interest(3)
-print(sa1)
-sa1.add_interest(3)
-print(sa1)
-sa1.credit(100)
-print(sa1)
-sa1.debit(600)
-print(sa1)
-sa1.debit(5000)
-print(sa1)
-sa1.debit(4804.5)
-print(sa1)
-sa1.debit(100)
-print(sa1)
-sa1.credit(5000)
-print(sa1)
-
-print '-------------'
-
-ba1 = BusinessAccount()
-ba1.type = 'Business Account'
-print(ba1.type)
 print(ba1)
-ba1.credit(1000)
+
+print('-------------')
+
+# Month #2 statement plus interest
+
+# Make deposit into checking
+setattr(ca1, 'balance', (ca1.balance + 1000))
+# Withdraw from checking
+setattr(ca1, 'balance', (ca1.balance - 500))
+
+# Make a deposit into savings
+setattr(sa1, 'balance', (sa1.balance + 100))
+
+print(ca1)
+print(sa1)
 print(ba1)
-ba1.debit(2000)
-print(ba1)
-ba1.add_interest(3)
+
+print('-------------')
+
+# Month #3 statement plus interest
+
+# Make deposit into checking
+setattr(ca1, 'balance', (ca1.balance + 2500))
+# Withdraw from checking
+setattr(ca1, 'balance', (ca1.balance - 700))
+
+# Make a deposit into savings
+setattr(sa1, 'balance', (sa1.balance + 100))
+
+# Make a deposit into business
+setattr(ba1, 'balance', (ba1.balance + 1000))
+
+print(ca1)
+print(sa1)
 print(ba1)
