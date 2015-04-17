@@ -1,4 +1,5 @@
 #!/usr/bin/python
+"""Flowers and Bouquets"""
 
 # author: catomatic
 # website: https://github.com/catomatic
@@ -11,8 +12,11 @@
 # order more.
 # https://github.com/karan/Projects
 
+from __future__ import print_function
+
 
 class Flower(object):
+    """Creates a Flower object"""
     def __init__(self, name, color, fl_id, **kwargs):
         self.name = name
         self.color = color
@@ -20,10 +24,12 @@ class Flower(object):
         super(Flower, self).__init__(**kwargs)
 
     def flower_info(self):
+        """Returns a list of Flower attributes"""
         return [self.name, self.color, self.fl_id]
 
 
 class Bouquet(object):
+    """Creates a Bouquet object for flowers"""
     def __init__(self, name, qty, flowers, b_id, **kwargs):
         self.name = name
         self.b_id = b_id
@@ -32,6 +38,7 @@ class Bouquet(object):
         super(Bouquet, self).__init__(**kwargs)
 
 
+# pylint: disable=C0103
 fl1 = Flower(name='Rose', color='red', fl_id='r01')
 fl2 = Flower(name='Rose', color='white', fl_id='r02')
 fl3 = Flower(name='Rose', color='black', fl_id='r03')
