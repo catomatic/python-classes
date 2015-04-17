@@ -20,6 +20,11 @@ Flower and Bouquet objects along with selling, adding, and keeping track of reor
 
 Various account types inheriting from Account.
 
+### Source file: kingsnakes.py
+
+Messing around with a long chain of inherited classes, from "Animalia" to "Lampropeltis."
+
 #### Updates
 
+04/17/2015: Some code cleanup with help from pylint
 04/01/2015: Better class designs on most, Python 3.4 and Python 2.7 support on all
