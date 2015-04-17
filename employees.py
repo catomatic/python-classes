@@ -1,4 +1,5 @@
 #!/usr/bin/python
+"""Employees and Company"""
 
 # author: catomatic
 # website: https://github.com/catomatic
@@ -12,14 +13,17 @@
 # manage the employees. You should be able to hire, fire and raise employees.
 # https://github.com/karan/Projects
 
+from __future__ import print_function
+
 
 def pct_to_dec(num):
-    # Function to convert percent to decimal
+    """Returns decimal version of percent"""
     dec = float(num) / 100
     return dec
 
 
 class Employee(object):
+    """Creates an Employee"""
     def __init__(self, emp_name, emp_type, bonus, pay_raise, **kwargs):
         self.emp_name = emp_name
         self.emp_type = emp_type
@@ -28,24 +32,29 @@ class Employee(object):
         super(Employee, self).__init__(**kwargs)
 
     def employee_name(self):
+        """Returns employee name"""
         return 'Employee Name: {0}'.format(self.emp_name)
 
     def employee_type(self):
+        """Returns employee type"""
         return 'Employee Type: {0}'.format(self.emp_type)
 
     def pay_year_end(self):
+        """Returns total pay"""
         give_raise = (self.pay_year * pct_to_dec(self.pay_raise)) + self.pay_year
         self.total_pay = give_raise + self.bonus
         return 'Total Pay: {0}'.format(self.total_pay)
 
 
 class HourlyEmployee(Employee):
+    """Creates a HourlyEmployee Employee"""
     def __init__(self, pay_hour, wk_hours, **kwargs):
         self.pay_hour = pay_hour
         self.wk_hours = wk_hours
         super(HourlyEmployee, self).__init__(**kwargs)
 
     def pay_year_end(self):
+        """Returns total pay"""
         base_year = (self.pay_hour * self.wk_hours) * 52
         give_raise = (base_year * pct_to_dec(self.pay_raise)) + base_year
         self.total_pay = give_raise + self.bonus
@@ -53,36 +62,41 @@ class HourlyEmployee(Employee):
 
 
 class SalariedEmployee(Employee):
+    """Creates a SalariedEmployee Employee"""
     def __init__(self, pay_year, **kwargs):
         self.pay_year = pay_year
         super(SalariedEmployee, self).__init__(**kwargs)
 
 
 class Manager(Employee):
+    """Creates a Manager Employee"""
     def __init__(self, pay_year, **kwargs):
         self.pay_year = pay_year
         super(Manager, self).__init__(**kwargs)
 
 
 class Executive(Employee):
+    """Creates an Executive Employee"""
     def __init__(self, pay_year, **kwargs):
         self.pay_year = pay_year
         super(Executive, self).__init__(**kwargs)
 
 
 class Company(object):
+    """Creates a Company"""
     def __init__(self, staff_list, **kwargs):
         self.staff_list = staff_list
         super(Company, self).__init__(**kwargs)
 
 
-he1 = HourlyEmployee(pay_hour=10.00, bonus=2000, wk_hours=20, 
+# pylint: disable=C0103
+he1 = HourlyEmployee(pay_hour=10.00, bonus=2000, wk_hours=20,
     pay_raise=2.00, emp_name='Fluffy', emp_type='Hourly Employee')
-se1 = SalariedEmployee(emp_name='Mittens', emp_type='Salaried Employee', 
+se1 = SalariedEmployee(emp_name='Mittens', emp_type='Salaried Employee',
     bonus=5000, pay_raise=2.0, pay_year=35000)
-m1 = Manager(emp_name='Chirpy', emp_type='Manager', 
+m1 = Manager(emp_name='Chirpy', emp_type='Manager',
     bonus=7000, pay_raise=3.5, pay_year=50000)
-e1 = Manager(emp_name='Snowball', emp_type='Executive', 
+e1 = Manager(emp_name='Snowball', emp_type='Executive',
     bonus=10000, pay_raise=5.0, pay_year=100000)
 
 # Hire employees
