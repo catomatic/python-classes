@@ -1,4 +1,5 @@
 #!/usr/bin/python
+"""Types of bank accounts"""
 
 # author: catomatic
 # website: https://github.com/catomatic
@@ -11,14 +12,17 @@
 # style program.
 # https://github.com/karan/Projects
 
+from __future__ import print_function
+
 
 def pct_to_dec(num):
-    # Function to convert percent to decimal
+    """Returns decimal version of percent"""
     dec = float(num) / 100
     return dec
 
 
 class Account(object):
+    """Creates an Account"""
     def __init__(self, balance, int_rate, act_type, min_balance, **kwargs):
         self.balance = balance
         self.int_rate = int_rate
@@ -27,6 +31,7 @@ class Account(object):
         super(Account, self).__init__(**kwargs)
 
     def __str__(self):
+        """Returns formatted account type and balance"""
         # Charge $25 fee if balance drops below minimum
         if self.balance < self.min_balance:
             self.balance -= 25
@@ -36,25 +41,29 @@ class Account(object):
 
 
 class CheckingAccount(Account):
+    """Creates a CheckingAccount Account"""
     def __init__(self, **kwargs):
         super(CheckingAccount, self).__init__(**kwargs)
 
 
 class SavingsAccount(Account):
+    """Creates a SavingsAccount Account"""
     def __init__(self, **kwargs):
         super(SavingsAccount, self).__init__(**kwargs)
 
 
 class BusinessAccount(Account):
+    """Creates a BusinessAccount Account"""
     def __init__(self, **kwargs):
         super(BusinessAccount, self).__init__(**kwargs)
 
 
-ca1 = CheckingAccount(balance=500, int_rate=0.25, act_type='Checking Account', 
+# pylint: disable=C0103
+ca1 = CheckingAccount(balance=500, int_rate=0.25, act_type='Checking Account',
     min_balance=0)
-sa1 = SavingsAccount(balance=50, int_rate=0.50, act_type='Savings Account', 
+sa1 = SavingsAccount(balance=50, int_rate=0.50, act_type='Savings Account',
     min_balance=0)
-ba1 = BusinessAccount(balance=4000, int_rate=0.75, act_type='Business Account', 
+ba1 = BusinessAccount(balance=4000, int_rate=0.75, act_type='Business Account',
     min_balance=5000)
 
 # Month #1 statement, initial deposits plus interest
