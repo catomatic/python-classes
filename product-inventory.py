@@ -1,4 +1,5 @@
 #!/usr/bin/python
+"""Products and Inventories"""
 
 # author: catomatic
 # website: https://github.com/catomatic
@@ -11,8 +12,11 @@
 # track of various products and can sum up the Inventory value.
 # https://github.com/karan/Projects
 
+from __future__ import print_function
+
 
 class Product(object):
+    """Creates a Product"""
     def __init__(self, price, prod_id, qty, name, **kwargs):
         self.price = price
         self.prod_id = prod_id
@@ -21,10 +25,12 @@ class Product(object):
         super(Product, self).__init__(**kwargs)
 
     def product_info(self):
+        """Returns a list of product attributes"""
         return [self.price, self.prod_id, self.qty, self.name]
 
 
 class Inventory(object):
+    """Creates an Inventory"""
     def __init__(self, inv_id, name, products, **kwargs):
         self.inv_id = inv_id
         self.name = name
@@ -32,6 +38,7 @@ class Inventory(object):
         super(Inventory, self).__init__(**kwargs)
 
 
+# pylint: disable=C0103
 pf1 = Product(price=5.00, prod_id='fr01', qty=12, name='Apples')
 pf2 = Product(price=3.00, prod_id='fr02', qty=13, name='Oranges')
 pv1 = Product(price=2.00, prod_id='veg01', qty=8, name='Eggplant')
