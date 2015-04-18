@@ -15,19 +15,21 @@ import inspect
 class Animalia(object):
     """Creates an Animalia"""
     def __init__(self, **kwargs):
+        self.kingdom_name = self.__class__.__name__
         super(Animalia, self).__init__(**kwargs)
 
-    def kingdom_info(self):
+    def kingdom_info(self, *args):
         """Returns information on this kingdom"""
         return '''
         Animals (kingdom Animalia) are eukaryotic and multicellular inhabitants 
-        of planet Earth. {0} {1} is a member of this kingdom.
-        '''.format(self.__class__.__name__, self.species)
+        of planet Earth. {0} is a member of this kingdom.
+        '''.format(' '.join(args))
 
 
 class Chordata(Animalia):
     """Creates a Chordata"""
     def __init__(self, **kwargs):
+        self.phylum_name = self.__class__.__name__
         super(Chordata, self).__init__(**kwargs)
 
     def phylum_info(self):
@@ -38,6 +40,7 @@ class Chordata(Animalia):
 class Vertebrata(Chordata):
     """Creates a Vertebrata"""
     def __init__(self, **kwargs):
+        self.subphylum_name = self.__class__.__name__
         super(Vertebrata, self).__init__(**kwargs)
 
     def subphylum_info(self):
@@ -48,6 +51,7 @@ class Vertebrata(Chordata):
 class Reptilia(Vertebrata):
     """Creates a Reptilia"""
     def __init__(self, **kwargs):
+        self.class_name = self.__class__.__name__
         super(Reptilia, self).__init__(**kwargs)
 
     def class_info(self):
@@ -58,6 +62,7 @@ class Reptilia(Vertebrata):
 class Squamata(Reptilia):
     """Creates a Squamata"""
     def __init__(self, **kwargs):
+        self.order_name = self.__class__.__name__
         super(Squamata, self).__init__(**kwargs)
 
     def order_info(self):
@@ -68,6 +73,7 @@ class Squamata(Reptilia):
 class Serpentes(Squamata):
     """Creates a Serpentes"""
     def __init__(self, **kwargs):
+        self.suborder_name = self.__class__.__name__
         super(Serpentes, self).__init__(**kwargs)
 
     def suborder_info(self):
@@ -78,6 +84,7 @@ class Serpentes(Squamata):
 class Colubridae(Serpentes):
     """Creates a Colubridae"""
     def __init__(self, **kwargs):
+        self.family_name = self.__class__.__name__
         super(Colubridae, self).__init__(**kwargs)
 
     def family_info(self):
@@ -92,6 +99,7 @@ class Lampropeltis(Colubridae):
         self.common_name = common_name
         self.colors = colors
         self.geo_loc = geo_loc
+        self.genus_name = self.__class__.__name__
         super(Lampropeltis, self).__init__(**kwargs)
 
     def genus_info(self):
@@ -121,6 +129,9 @@ class Lampropeltis(Colubridae):
 
 
 # pylint: disable=C0103
+generic_animal = Animalia()
+generic_reptile = Reptilia()
+
 ks1 = Lampropeltis(species='getula getula',
     common_name='Eastern Chain Kingsnake',
     colors=['black', 'yellow', 'white'],
@@ -131,4 +142,7 @@ print(ks1.species_info())
 print(ks1.common_name_info())
 print(ks1.geo_info())
 print(ks1.colors_info())
-print(ks1.kingdom_info())
+print(ks1.kingdom_info(ks1.genus_name, ks1.species))
+
+print(generic_animal.kingdom_info('Generic animal'))
+print(generic_reptile.kingdom_info('Generic reptile'))
