@@ -18,7 +18,8 @@ class Animalia(object):
         self.kingdom_name = self.__class__.__name__
         super(Animalia, self).__init__(**kwargs)
 
-    def kingdom_info(self, *args):
+    @staticmethod
+    def kingdom_info(*args):
         """Returns information on this kingdom"""
         return '''
         Animals (kingdom Animalia) are eukaryotic and multicellular inhabitants 
@@ -111,22 +112,6 @@ class Lampropeltis(Colubridae):
         names = reversed([i.__name__ for i in inspect.getmro(self.__class__)])
         return ' > '.join(names)
 
-    def species_info(self):
-        """Returns species"""
-        return 'Species: {0}'.format(self.species)
-
-    def common_name_info(self):
-        """Returns common name"""
-        return 'Common Name: {0}'.format(self.common_name)
-
-    def colors_info(self):
-        """Returns colors"""
-        return 'Colors: {0}'.format(', '.join(self.colors))
-
-    def geo_info(self):
-        """Returns colors"""
-        return 'Geographic Location: {0}'.format(self.geo_loc)
-
 
 # pylint: disable=C0103
 generic_animal = Animalia()
@@ -138,10 +123,10 @@ ks1 = Lampropeltis(species='getula getula',
     geo_loc='United States East Coast')
 
 print(ks1.hierarchy())
-print(ks1.species_info())
-print(ks1.common_name_info())
-print(ks1.geo_info())
-print(ks1.colors_info())
+print('Species: {0}'.format(ks1.species))
+print('Common Name: {0}'.format(ks1.common_name))
+print('Geographic Location: {0}'.format(ks1.geo_loc))
+print('Colors: {0}'.format(', '.join(ks1.colors)))
 print(ks1.kingdom_info(ks1.genus_name, ks1.species))
 
 print(generic_animal.kingdom_info('Generic animal'))
